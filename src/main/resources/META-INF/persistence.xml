@@ -1,0 +1,72 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <!-- MySQL (relational) using Hibernate ORM and JTA -->
+
+        <persistence-unit name="db-mysql" transaction-type="JTA">
+          <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+           <class>de.hsmannheim.igt.exercise.models.Customer</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://172.18.0.1:3306/ogm_hibernate?createDatabaseIfNotExist=true"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="123456"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+
+    <!-- MongoDB (document store) using Hibernate OGM and JTA -->
+
+    <persistence-unit name="db-mongodb" transaction-type="JTA">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="mongodb" />
+            <property name="hibernate.ogm.datastore.database" value="my-mongo" />
+            <property name="hibernate.ogm.datastore.host" value="172.18.0.1:27017" />
+            <property name="hibernate.ogm.datastore.create_database" value="true" />
+        </properties>
+    </persistence-unit>
+
+    <!-- Neo4J (GraphDB) using Hibernate OGM and JTA, -->
+
+    <persistence-unit name="db-neo4j" transaction-type="JTA">
+       <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="neo4j_bolt"/>
+            <property name="hibernate.ogm.datastore.host" value="172.18.0.1:7687"/>
+            
+            <property name="hibernate.ogm.datastore.database" value="myneo" />
+            <property name="hibernate.ogm.datastore.username" value=""/>
+            <property name="hibernate.ogm.datastore.password" value=""/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        </properties>
+    </persistence-unit>
+
+    <!-- Redis (Key-Value-Store) using Hibernate OGM and JTA, -->
+
+    <persistence-unit name="db-redis" transaction-type="JTA">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="redis_experimental" />
+            <property name="hibernate.ogm.datastore.grid_dialect" value="org.hibernate.ogm.datastore.redis.RedisJsonDialect"/>
+            <property name="hibernate.ogm.datastore.host" value="172.18.0.1:6379"/>
+            <property name="hibernate.ogm.datastore.database" value="13"/>
+            <property name="hibernate.ogm.redis.ssl" value="false"/>
+            <property name="hibernate.ogm.redis.connection_timeout" value="5000"/>
+        </properties>
+    </persistence-unit>
+
+    <!-- Cassandra (Column-Oriented DB) using Hibernate OGM and JTA, locally -->
+       <persistence-unit name="db-cassandra" transaction-type="JTA">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="cassandra_experimental"/>
+            <property name="hibernate.ogm.datastore.host" value="172.18.0.1:9042"/>
+            <property name="hibernate.ogm.datastore.database" value="my_cassandra"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
