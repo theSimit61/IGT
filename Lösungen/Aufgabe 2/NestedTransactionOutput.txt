@@ -1,0 +1,4 @@
+Caused by: java.lang.IllegalStateException: BaseTransaction.checkTransactionState - ARJUNA016051: thread is already associated with a transaction!
+my_server    |  at com.arjuna.ats.internal.jta.transaction.arjunacore.BaseTransaction.checkTransactionState(BaseTransaction.java:264)
+my_server    |  at com.arjuna.ats.internal.jta.transaction.arjunacore.BaseTransaction.begin(BaseTransaction.java:68)
+my_server    |  ... 68 more
